@@ -10,6 +10,8 @@
     <com.rairmmd.fancyedittext.FancyEditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:hint="请输入内容"
+        android:textSize="16sp"
         app:fetAnimType="UP"
         app:fetDuration="1000"
         app:fetTextColor="@color/colorAccent"

@@ -3,10 +3,11 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: "maven-publish"
 apply plugin: 'maven'
 
-def siteUrl = 'https://github.com/Rairmmd/AndEsptouch'
-def gitUrl = 'https://github.com/Rairmmd/AndEsptouch.git'
+def siteUrl = 'https://github.com/Rairmmd/FancyEditText'
+def gitUrl = 'https://github.com/Rairmmd/FancyEditText.git'
 
 group = "com.rairmmd"
 version = "1.0.0"
@@ -32,8 +33,8 @@ install {
         pom {
             project {
                 packaging 'aar'
-                name 'AndEsptouch'
-                description 'Esptouch for Android'
+                name 'FancyEditText'
+                description 'FancyEditText for Android'
                 url siteUrl
                 licenses {
                     license {
@@ -61,24 +62,26 @@ install {
     }
 }
 
-//配置源码
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
 //配置文档
-task javadoc(type: Javadoc) {
-    options.encoding = "UTF-8"
+task androidJavadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    exclude '**/R.html', '**/R.*.html', '**/index.html', '**/*.kt'
+    options.encoding = "UTF-8"
+    options.charSet = "UTF-8"
 }
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
     classifier = 'javadoc'
-    from javadoc.destinationDir
+    from androidJavadoc.destinationDir
+}
+//配置源码
+task androidSourcesJar(type: Jar) {
+    classifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
 }
 artifacts {
-    archives javadocJar
-    archives sourcesJar
+    archives androidJavadoc
+    archives androidSourcesJar
 }
 
 Properties properties = new Properties()
@@ -86,12 +89,14 @@ properties.load(project.rootProject.file('local.properties').newDataInputStream(
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
+    override = true
+    publish = true
     configurations = ['archives']
     pkg {
         //仓库
         repo = "maven"
         //仓库名
-        name = "AndEsptouch"
+        name = "FancyEditText"
         // #CONFIG# project name in jcenter
         websiteUrl = siteUrl
         vcsUrl = gitUrl
