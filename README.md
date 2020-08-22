@@ -2,6 +2,9 @@
 
 输入时文本飞来飞去的EditText
 
+#### 效果
+![效果](https://ftp.bmp.ovh/imgs/2020/08/041ad6df4f353ee5.gif)
+
 ### 使用
 ### 引入
 ```

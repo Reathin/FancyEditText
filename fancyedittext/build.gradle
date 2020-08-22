@@ -3,7 +3,6 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: "maven-publish"
 apply plugin: 'maven'
 
 def siteUrl = 'https://github.com/Rairmmd/FancyEditText'
@@ -45,11 +44,8 @@ install {
                 developers {
                     developer {
                         id 'rairmmd'
-                        // #CONFIG# // your user id (you can write your nickname)
                         name 'rairmmd'
-                        // #CONFIG# // your user name
                         email 'rairmmd@qq.com'
-                        // #CONFIG# // your email
                     }
                 }
                 scm {
@@ -62,25 +58,26 @@ install {
     }
 }
 
-//配置文档
-task androidJavadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-    exclude '**/R.html', '**/R.*.html', '**/index.html', '**/*.kt'
-    options.encoding = "UTF-8"
-    options.charSet = "UTF-8"
-}
-task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
-    classifier = 'javadoc'
-    from androidJavadoc.destinationDir
-}
 //配置源码
 task androidSourcesJar(type: Jar) {
     classifier = 'sources'
     from android.sourceSets.main.java.srcDirs
 }
+//配置文档
+task androidJavadoc(type: Javadoc) {
+    options.encoding = "UTF-8"
+    options.charSet = "UTF-8"
+
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    exclude '**/R.html', '**/R.*.html', '**/index.html', '**/*.kt'
+}
+task androidJavadocJar(type: Jar, dependsOn: androidJavadoc) {
+    classifier = 'javadoc'
+    from androidJavadoc.destinationDir
+}
 artifacts {
-    archives androidJavadoc
+    archives androidJavadocJar
     archives androidSourcesJar
 }
 
@@ -97,7 +94,7 @@ bintray {
         repo = "maven"
         //仓库名
         name = "FancyEditText"
-        // #CONFIG# project name in jcenter
+
         websiteUrl = siteUrl
         vcsUrl = gitUrl
         licenses = ["Apache-2.0"]
