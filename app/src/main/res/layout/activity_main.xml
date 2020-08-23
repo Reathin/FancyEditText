@@ -16,7 +16,7 @@
         app:fetDuration="1000"
         app:fetTextColor="@color/colorAccent"
         app:fetTextScale="2"
-        app:fetTextStartSize="18sp" />
+        app:fetTextSize="18sp" />
 
     <com.rairmmd.fancyedittext.FancyEditText
         android:layout_width="match_parent"
@@ -25,5 +25,5 @@
         app:fetDuration="1000"
         app:fetTextColor="@color/colorAccent"
         app:fetTextScale="2"
-        app:fetTextStartSize="18sp" />
+        app:fetTextSize="18sp" />
 </LinearLayout>

@@ -50,7 +50,7 @@ class FancyEditText(context: Context, attributeSet: AttributeSet? = null) :
 
             mTextColor = typeArray.getColor(R.styleable.FancyEditText_fetTextColor, mTextColor)
             mTextSize =
-                typeArray.getDimension(R.styleable.FancyEditText_fetTextStartSize, mTextSize)
+                typeArray.getDimension(R.styleable.FancyEditText_fetTextSize, mTextSize)
             mTextScale = typeArray.getFloat(R.styleable.FancyEditText_fetTextScale, mTextScale)
             mDuration = typeArray.getInt(R.styleable.FancyEditText_fetDuration, mDuration)
             mAnimType = typeArray.getInt(R.styleable.FancyEditText_fetAnimType, mAnimType)

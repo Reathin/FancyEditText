@@ -2,7 +2,7 @@
 <resources>
     <declare-styleable name="FancyEditText">
         <attr name="fetTextColor" format="color|reference" />
-        <attr name="fetTextStartSize" format="dimension|reference" />
+        <attr name="fetTextSize" format="dimension|reference" />
         <attr name="fetTextScale" format="float" />
         <attr name="fetDuration" format="integer" />
         <attr name="fetAnimType" format="enum">
